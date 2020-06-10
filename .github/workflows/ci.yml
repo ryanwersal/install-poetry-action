@@ -27,8 +27,11 @@ jobs:
     - name: Build
       run: yarn run build
 
-    - name: test
+    - name: Test
       run: yarn run test
 
     - name: Pack
       run: yarn run pack
+
+    - name: Validate
+      uses: ./

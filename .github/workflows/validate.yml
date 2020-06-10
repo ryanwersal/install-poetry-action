@@ -15,5 +15,3 @@ jobs:
 
     - name: Validate
       uses: ./
-      with:
-        milliseconds: 1000
