@@ -22,10 +22,10 @@
     "node",
     "setup"
   ],
-  "author": "YourNameOrOrganization",
+  "author": "Ryan Wersal <ryan@ryanwersal.com>",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.0"
+    "@actions/core": "^1.2.4"
   },
   "devDependencies": {
     "@types/jest": "^26.0.0",
@@ -40,6 +40,6 @@
     "js-yaml": "^3.14.0",
     "prettier": "^2.0.5",
     "ts-jest": "^26.1.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.9.5"
   }
 }
