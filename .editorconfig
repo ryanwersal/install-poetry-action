@@ -9,7 +9,7 @@ insert_final_newline = true
 max_line_length = 80
 trim_trailing_whitespace = true
 
-[*.{js,ts,json}]
+[*.{js,ts,json,yml}]
 indent_size = 2
 
 [**/node_modules/**]
