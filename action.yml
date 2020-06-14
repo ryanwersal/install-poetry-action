@@ -2,10 +2,18 @@ name: Install Poetry
 description: Install Poetry for managing Python projects
 author: Ryan Wersal
 inputs:
-  version:
+  poetry-version:
     description: Version of Poetry to install
     default: latest
     required: true
+  create-virtualenv:
+    description: Create a virtualenv
+    default: "true"
+    required: false
+  virtualenv-in-project:
+    description: Create virtualenv within the project
+    default: "true"
+    required: false
 runs:
   using: node12
   main: dist/index.js

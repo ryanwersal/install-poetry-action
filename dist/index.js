@@ -953,6 +953,19 @@ class ExecState extends events.EventEmitter {
 
 /***/ }),
 
+/***/ 55:
+/***/ (function(__unusedmodule, exports) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.toBoolStr = exports.strToBool = void 0;
+exports.strToBool = (value) => value === "true" || value === "yes";
+exports.toBoolStr = (value) => (value ? "true" : "false");
+
+
+/***/ }),
+
 /***/ 87:
 /***/ (function(module) {
 
@@ -1003,10 +1016,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const poetry_1 = __webpack_require__(507);
+const convert_1 = __webpack_require__(55);
 const run = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const version = core.getInput("version", { required: true }).toString();
-        yield poetry_1.installPoetry(version);
+        const poetryVersion = core.getInput("poetry-version", { required: true });
+        const createVirtualenv = convert_1.strToBool(core.getInput("create-virtualenv"));
+        const createVirtualenvInProject = convert_1.strToBool(core.getInput("virtualenv-in-project"));
+        yield poetry_1.installPoetry({
+            poetryVersion,
+            createVirtualenv,
+            createVirtualenvInProject,
+        });
     }
     catch (error) {
         core.setFailed(error.message);
@@ -1395,7 +1415,8 @@ const os_1 = __importDefault(__webpack_require__(87));
 const path_1 = __importDefault(__webpack_require__(622));
 const core = __importStar(__webpack_require__(470));
 const exec_1 = __webpack_require__(986);
-exports.installPoetry = (version) => __awaiter(void 0, void 0, void 0, function* () {
+const convert_1 = __webpack_require__(55);
+exports.installPoetry = ({ poetryVersion: version, createVirtualenv = true, createVirtualenvInProject = false, }) => __awaiter(void 0, void 0, void 0, function* () {
     yield exec_1.exec("curl -O -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py");
     const flags = ["--yes"];
     if (version !== "latest") {
@@ -1404,6 +1425,8 @@ exports.installPoetry = (version) => __awaiter(void 0, void 0, void 0, function*
     yield exec_1.exec(`python get-poetry.py ${flags.join(" ")}`);
     core.addPath(path_1.default.join(os_1.default.homedir(), ".poetry", "bin"));
     yield fs_1.promises.unlink("get-poetry.py");
+    yield exec_1.exec(`poetry config virtualenvs.create ${convert_1.toBoolStr(createVirtualenv)}`);
+    yield exec_1.exec(`poetry config virtualenvs.in-project ${convert_1.toBoolStr(createVirtualenvInProject)}`);
 });
 
 

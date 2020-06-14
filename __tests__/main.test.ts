@@ -5,6 +5,8 @@ import path from "path";
 
 describe("installPoetry", () => {
   it("installs specified poetry version", async () => {
-    await installPoetry("1.0.5");
+    await installPoetry({
+      poetryVersion: "1.0.5",
+    });
   });
 });
