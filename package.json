@@ -1,6 +1,6 @@
 {
   "name": "install-poetry-action",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Install Poetry for Python projects",
   "main": "lib/main.js",
