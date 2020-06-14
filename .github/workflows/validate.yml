@@ -2,8 +2,7 @@ name: Validate
 
 on:
   push:
-    branches:
-      - releases/*
+    tags: ["v*"]
 
 jobs:
   validate:
