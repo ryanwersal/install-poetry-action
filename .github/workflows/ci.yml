@@ -42,8 +42,15 @@ jobs:
       - name: Pack
         run: yarn run pack
 
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
       - name: Validate Action
         uses: ./
+        with:
+          poetry-version: 1.0.9
 
       - name: Confirm Poetry Works
         run: poetry --help

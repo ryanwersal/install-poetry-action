@@ -1,7 +1,8 @@
 import { installPoetry } from "../src/poetry";
-import process from "process";
-import cp from "child_process";
-import path from "path";
+import { saveCache, restoreCache } from "@actions/cache";
+
+jest.mock("@actions/cache");
+(restoreCache as any).mockResolvedValue(undefined);
 
 describe("installPoetry", () => {
   it("installs specified poetry version", async () => {

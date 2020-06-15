@@ -14,16 +14,18 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-      - name: Setup Node
-        uses: actions/setup-node@v2-beta
+      - name: Setup Python
+        uses: actions/setup-python@v2
         with:
-          node-version: "12"
+          python-version: "3.x"
 
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Validate
         uses: ./
+        with:
+          poetry-version: 1.0.9
 
       - name: Confirm Poetry Works
         run: poetry --help
