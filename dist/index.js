@@ -4159,7 +4159,13 @@ exports.installPoetry = ({ poetryVersion: version, createVirtualenv = true, crea
         yield exec_1.exec(`python get-poetry.py ${flags.join(" ")}`);
         yield fs_1.promises.unlink("get-poetry.py");
         core.info("Installation complete. Caching...");
-        yield cache_1.saveCache([destPath], cacheKey);
+        // Attempting to save a cache that exists will throw an error
+        try {
+            yield cache_1.saveCache([destPath], cacheKey);
+        }
+        catch (_a) {
+            core.info("Saving cache failed. It may already exist.");
+        }
     }
     core.addPath(path_1.default.join(destPath, "bin"));
     core.info("Configuring Poetry...");

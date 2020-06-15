@@ -42,7 +42,12 @@ export const installPoetry = async ({
 
     core.info("Installation complete. Caching...");
 
-    await saveCache([destPath], cacheKey);
+    // Attempting to save a cache that exists will throw an error
+    try {
+      await saveCache([destPath], cacheKey);
+    } catch {
+      core.info("Saving cache failed. It may already exist.");
+    }
   }
 
   core.addPath(path.join(destPath, "bin"));
