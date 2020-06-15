@@ -4,7 +4,6 @@ author: Ryan Wersal
 inputs:
   poetry-version:
     description: Version of Poetry to install
-    default: latest
     required: true
   create-virtualenv:
     description: Create a virtualenv
